@@ -1,0 +1,37 @@
+.container{
+    height: 100%;
+    background: linear-gradient(180deg, rgba(72,72,72,1) 0%, rgba(72,72,72,1) 30%, rgba(38,38,38,1) 67%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+    width: 20rem;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    padding: 1rem 1rem;
+    border-radius: 1rem;
+}
+
+img{
+    height: 10rem;
+    width: 10rem;
+    margin: auto;
+    display: flex;
+}
+
+.full-width{
+    width: 100%;
+}
+
+button{
+    margin-top: 1rem;
+}
+
+.register{
+    width: 100%;
+    margin-top: 2rem;
+    color: rgba(72,72,72,1);
+}
+

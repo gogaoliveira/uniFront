@@ -1,0 +1,36 @@
+<div class="container">
+    <form class="form mat-elevation-z9">
+
+        <img src="assets/img/logo_transp.png" alt="">
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input 
+                [formControl]="email"
+                required
+                [(ngModel)]="creds.email" 
+                name="email" 
+                matInput 
+                placeholder="exemplo@mail.com"
+            >
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input 
+                [formControl]="password"
+                required
+                [(ngModel)]="creds.password" 
+                name="password" 
+                type="password" 
+                matInput 
+                placeholder="*****"
+            >
+        </mat-form-field>
+
+        <button (click)="logar()" [disabled]="!validaCampos()" class="full-width mat-elevation-z5" mat-stroked-button >Entrar</button>
+        
+        <a class="register" mat-button (click)="register()" >Não possui conta? Cadastre-se</a>
+
+    </form>
+</div>
