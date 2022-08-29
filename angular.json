@@ -112,5 +112,7 @@
       }
     }
   },
-  "defaultProject": "uni"
+  "cli": {
+    "analytics": "3fd254e2-14c4-49fa-aef0-b24f3d552648"
+  }
 }

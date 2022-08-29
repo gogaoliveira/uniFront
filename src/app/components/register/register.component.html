@@ -2,13 +2,13 @@
 <div class="container">
     <form class="form mat-elevation-z9">
         <div class="cabecalhoRegistro">
-            <img src="assets/img/logo_transp.png" alt="">
             <h3>CADASTRO</h3>
         </div>
 
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>Nome</mat-label>
             <input 
+                [(ngModel)]="register.name"
                 name="Nome" 
                 [formControl]="nome"
                 required
@@ -20,6 +20,7 @@
         <mat-form-field class="full-width" appearance="outline">
             <mat-label>Email</mat-label>
             <input 
+                [(ngModel)]="register.email"
                 name="Email"
                 [formControl]="email" 
                 required
@@ -28,26 +29,33 @@
             >
         </mat-form-field>
 
-        <mat-radio-group class="full-width radio" aria-label="Select an option">
-            <mat-radio-button 
+        <mat-radio-group 
+            class="full-width radio" 
+            (change)="ajustaInscricao()" 
+            aria-label="Select an option"  
+            [(ngModel)]="rbInscricao" 
+            name="groupBut"
+        >
+            <mat-radio-button
+                checked
                 class="radio" 
-                value="1"
+                value="CPF"
             >Pessoa Fisica (CPF)</mat-radio-button>
             <mat-radio-button 
                 class="radio" 
-                value="2"
-            >Pessoa Jurídica (CNPJ)</mat-radio-button>
+                value="CNPJ"
+            >Pessoa Jurídica (CNPJ) </mat-radio-button>
         </mat-radio-group>
 
-        <mat-form-field class="full-width" appearance="outline">
-            <mat-label>CPF</mat-label>
-            <input 
+        <mat-form-field  class="full-width" appearance="outline">
+            <mat-label >{{tipoInscricao}}</mat-label>
+            <input
+                [(ngModel)]="inscricao" 
                 name="inscricao" 
-                
-                [formControl]="inscricao"
+                [mask]= mask
                 required
                 matInput 
-                placeholder="Ex. 123.456.789.00"
+                [placeholder]= placeholder
             >
         </mat-form-field>
 
@@ -76,7 +84,7 @@
             </mat-form-field>
             <span *ngIf="!validaSenha()" class="error"> Campos devem ser iguais!!! </span>
         </div>
-        <button [disabled]="!validaCampos()" class="full-width mat-elevation-z5" mat-stroked-button >Cadastrar</button>
+        <button (click)="newRegister()" [disabled]="!validaCampos()" class="full-width mat-elevation-z5" mat-stroked-button >Cadastrar</button>
 
         <a class="register" mat-button (click)="login()" >Já possui conta? Faça o Login</a>
     </form>

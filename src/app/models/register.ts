@@ -1,6 +1,6 @@
-export interface Register{
-    nome: String;
+export interface RegisterCPF{
+    name: String;
     email: string;
-    inscricao: String;
+    cpf: String;
     password: string;
 }

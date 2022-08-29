@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { Credenciais } from 'src/app/models/cretenciais';
 
 import { ToastrService } from 'ngx-toastr'
 import { AuthService } from 'src/app/services/auth.service';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({

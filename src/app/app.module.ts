@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Para trabalhar com formulários no Angular 12
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Para realizar requisições HTTP
 import { HttpClientModule } from '@angular/common/http';
 
@@ -16,7 +15,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -28,6 +26,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { ToastrModule } from 'ngx-toastr'
 
 //componentes
 import { NavComponent } from './components/nav/nav.component';
@@ -35,8 +34,9 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RegisterDocumentsComponent } from './components/user/register-documents/register-documents.component';
 import { LoginComponent } from './components/login/login.component';
-import { ToastrModule } from 'ngx-toastr';
 import { RegisterComponent } from './components/register/register.component'
+import { NgxMaskModule } from 'ngx-mask';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +62,6 @@ import { RegisterComponent } from './components/register/register.component'
     MatPaginatorModule,
     MatCheckboxModule,
     MatSnackBarModule,
-    MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
     MatSelectModule,
@@ -74,6 +73,7 @@ import { RegisterComponent } from './components/register/register.component'
     MatCardModule,
     MatStepperModule,
     MatGridListModule,
+    NgxMaskModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 5000,
       closeButton: true

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { API } from '../config/api.config';
 import { Credenciais } from '../models/cretenciais';
 import { JwtHelperService } from '@auth0/angular-jwt'
+import { RegisterCPF } from '../models/register';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class AuthService {
       observe: 'response',
       responseType: 'text'
     })
+  }
+
+  register(register: RegisterCPF){
+    console.log(register)
+    return this.http.post(`${API.baseUrl}/usuarios`, register)
   }
 
   successfulllogin(authToken: string){
