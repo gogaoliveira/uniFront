@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent },
   {
     path: '',component: NavComponent, canActivate: [AuthGuard], children: [
-      {path: 'home',component: RequestComponent},
+      {path: 'home',component: HomeComponent},
       {path: 'cadastrar',component: RegisterDocumentsComponent},
       {path: 'postrg', component: PostRgComponent},
       {path: 'postcpf', component: PostCpfComponent},
