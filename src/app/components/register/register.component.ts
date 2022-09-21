@@ -97,9 +97,8 @@ export class RegisterComponent implements OnInit {
     this.service.authenticate(this.creds)
       .subscribe({
         next:  (resposta) => {
-          this.service.successfulllogin(resposta.headers.get('Authorization').substring(7));
+          this.service.successfulllogin(resposta.headers.get('Authorization').substring(7), resposta.headers.get('user'));
           this.router.navigate(['home']);
-          console.log(resposta.headers.get('Authorization').substring(7));
         },
         error: () => { 
           this.toast.error('Erro ao acessar o sistema', 'login'),

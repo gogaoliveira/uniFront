@@ -36,6 +36,17 @@ import { RegisterDocumentsComponent } from './components/user/register-documents
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component'
 import { NgxMaskModule } from 'ngx-mask';
+import { PostRgComponent } from './components/user/register-documents/documents/post-rg/post-rg.component';
+import { PostCpfComponent } from './components/user/register-documents/documents/post-cpf/post-cpf.component';
+import { PostEleitorComponent } from './components/user/register-documents/documents/post-eleitor/post-eleitor.component';
+import { PostCasamentoComponent } from './components/user/register-documents/documents/post-casamento/post-casamento.component';
+import { PostNascimentoComponent } from './components/user/register-documents/documents/post-nascimento/post-nascimento.component';
+import { PostMotoristaComponent } from './components/user/register-documents/documents/post-motorista/post-motorista.component';
+import { PostTrabalhoComponent } from './components/user/register-documents/documents/post-trabalho/post-trabalho.component';
+import { PostEnderecoComponent } from './components/user/register-documents/documents/post-endereco/post-endereco.component';
+import { PostOutrosComponent } from './components/user/register-documents/documents/post-outros/post-outros.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { RequestComponent } from './components/user/request/request.component';
 
 
 @NgModule({
@@ -46,7 +57,17 @@ import { NgxMaskModule } from 'ngx-mask';
     HeaderComponent,
     RegisterDocumentsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PostRgComponent,
+    PostCpfComponent,
+    PostEleitorComponent,
+    PostCasamentoComponent,
+    PostNascimentoComponent,
+    PostMotoristaComponent,
+    PostTrabalhoComponent,
+    PostEnderecoComponent,
+    PostOutrosComponent,
+    RequestComponent
   ],
   imports: [
     BrowserModule,
@@ -58,8 +79,8 @@ import { NgxMaskModule } from 'ngx-mask';
     // Requisições http
     HttpClientModule,
     // Angular Material
-    MatFormFieldModule,
     MatPaginatorModule,
+    MatDatepickerModule,
     MatCheckboxModule,
     MatSnackBarModule,
     MatSidenavModule,
@@ -83,5 +104,3 @@ import { NgxMaskModule } from 'ngx-mask';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
