@@ -28,8 +28,6 @@ export class AuthService {
   successfulllogin(authToken: string, user: string){
     localStorage.setItem('token', authToken);
     localStorage.setItem('user', user);
-    console.log("token: " + authToken)
-    console.log("ID: " + user)
   }
 
   isAuthenticated(){
