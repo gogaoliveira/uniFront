@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Toast, ToastrService } from 'ngx-toastr';
-import { Rg } from 'src/app/models/rg';
+
+import { AuthService } from 'src/app/services/auth.service';
 import { DocService } from 'src/app/services/doc.service';
 
 @Component({
@@ -11,67 +13,93 @@ import { DocService } from 'src/app/services/doc.service';
 })
 export class PostRgComponent implements OnInit {
 
-  rg: Rg={
-    type: 'RG',
-    numberDocument: '',
-    photoDocument: 'testeFoto.jpg',
-    dataExpedicao: null,
-    dataNascimento: null,
-    naturalidade: '',
-    nomeMae: '',
-    nomePai: '',
-    orgaoExpedidor: '',
-    user: Number(localStorage.getItem('user'))
-  }
 
-  numero          = new FormControl(Validators.minLength(3));
-  orgaoExpedidor  = new FormControl(Validators.minLength(3));
-  dataNascimento  = new FormControl(Validators.required);
-  dataExpedicao   = new FormControl(Validators.required);
-  naturalidade    = new FormControl(Validators.minLength(3));
-  nomeMae         = new FormControl(Validators.minLength(3));
-  nomePai         = new FormControl(Validators.minLength(3));
+  rg: FormGroup
+  documents: String[] = []
+  hasRg: boolean = false
+  documentId: number
 
   constructor(
-    private serv: DocService,
-    private toast: ToastrService
+    private formBuilder: FormBuilder,
+    private serviceAuth: AuthService,
+    private serviceDoc: DocService,
+    private toast: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.initializeForm()
+    this.serviceAuth.getDateUser()
+      .subscribe({
+        next: (response) => {
+          this.documents = response['documents']
+          for (let i = 0; i < this.documents.length; i++) {
+            if (this.documents[i]['type'] == 'RG') {
+              this.hasRg = true
+              this.documentId = this.documents[i]['id']
+              this.rg.patchValue({
+                numberDocument: this.documents[i]['numberDocument'],
+                photoDocument: this.documents[i]['photoDocument'],
+                dataExpedicao: this.dataFormat(this.documents[i]['dataExpedicao']),
+                dataNascimento: this.dataFormat(this.documents[i]['dataNascimento']),
+                naturalidade: this.documents[i]['naturalidade'],
+                nomeMae: this.documents[i]['nomeMae'],
+                nomePai: this.documents[i]['nomePai'],
+                orgaoExpedidor: this.documents[i]['orgaoExpedidor']
+              })
+            }
+          }
+        },
+        error: () => {
+          this.toast.error('Erro ao buscar dados', 'Erro')
+        }
+      })
+
+
   }
 
-  validaCampos(){
-    return (this.numero.valid && 
-            this.orgaoExpedidor.valid && 
-            this.dataNascimento.valid && 
-            this.dataExpedicao.valid &&
-            this.naturalidade.valid && 
-            this.nomeMae.valid && 
-            this.nomePai.valid
-            );
-  }
-
-  newRg(){
-    console.log(this.rg.type)
-    console.log(this.rg.numberDocument)
-    console.log(this.rg.photoDocument)
-    console.log(this.rg.dataExpedicao)
-    console.log(this.rg.dataNascimento)
-    console.log(this.rg.naturalidade)
-    console.log(this.rg.nomeMae)
-    console.log(this.rg.nomePai)
-    console.log(this.rg.orgaoExpedidor)
-    console.log(this.rg.user)
-
-    this.serv.postRg(this.rg)
-    .subscribe({
-      next: () => {
-        console.log(this.rg)
-      },
-      error: (error) => {
-        this.toast.error('Erro')
-      }
+  initializeForm() {
+    this.rg = this.formBuilder.group({
+      type: ['RG'],
+      numberDocument: ['', [Validators.minLength(3), Validators.required]],
+      photoDocument: 'testeFoto.jpg',
+      dataExpedicao: [null],
+      dataNascimento: [null],
+      naturalidade: ['', [Validators.minLength(3), Validators.required]],
+      nomeMae: ['', [Validators.minLength(3), Validators.required]],
+      nomePai: ['', [Validators.minLength(3), Validators.required]],
+      orgaoExpedidor: ['', [Validators.minLength(3), Validators.required]],
+      user: [Number(localStorage.getItem('user'))]
     })
   }
 
+  dataFormat(date: Date) {
+    return date.toString().slice(0, 10)
+  }
+
+  postRg() {
+    this.serviceDoc.post(this.rg.value, "rg")
+      .subscribe({
+        next: () => {
+          this.toast.info('sucesso')
+          this.router.navigate(['cadastrar']);
+        },
+        error: () => {
+          this.toast.error('Erro')
+        }
+      })
+  }
+
+  putRg() {
+    this.serviceDoc.update(this.rg.value, this.documentId, "rg")
+      .subscribe({
+        next: () => {
+          this.toast.info('sucesso')
+          this.router.navigate(['cadastrar']);
+        },
+        error: () => {
+          this.toast.error('Erro')
+        }
+      })
+  }
 }

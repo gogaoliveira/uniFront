@@ -2,67 +2,87 @@
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <div class="p-5">
-                <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Cadastro de Certidão de Nascimento</h1>
+                <div class="row">
+                    <div class="col-11">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Cadastro de Certidão de Nascimento</h1>
+                        </div>
+                    </div>
+                    <div class="col-1" *ngIf="hasEndereco">
+                        <button class="btn btn-danger btn-user btn-block text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                <path fill-rule="evenodd"
+                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <form class="user">
+                <form class="user" [formGroup]="endereco">
 
                     <div class="form-group row">
                         <div class="col-sm-9 mb-3 mb-sm-0">
                             <label for="endereco" class="form-label">Endereço</label>
-                            <input type="text" class="form-control form-control-user" id="endereco" placeholder="Ex. 123456">
+                            <input type="text" class="form-control form-control-user" id="endereco"
+                                placeholder="Ex. 123456" name="numero" formControlName="endereco">
                         </div>
                         <div class="col-sm-3">
                             <label for="numero" class="form-label">Numero</label>
-                            <input type="text" class="form-control form-control-user" id="numero" placeholder="Ex. 123.456.789-09">
+                            <input type="text" class="form-control form-control-user" id="numero"
+                                placeholder="Ex. 123.456.789-09" name="numero" formControlName="numero">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="complemento" class="form-label">Complemento</label>
-                        <input type="text" class="form-control form-control-user" id="complemento" placeholder="Ex. próximo a farmácia ">
+                        <input type="text" class="form-control form-control-user" id="complemento"
+                            placeholder="Ex. próximo a farmácia" name="numero" formControlName="complemento">
                     </div>
 
                     <div class="form-group row">
                         <div class="col-sm-4 mb-3 mb-sm-0">
                             <label for="cep" class="form-label">CEP</label>
-                            <input type="text" class="form-control form-control-user" id="cep" placeholder="Ex. 88.900-000">
+                            <input type="text" class="form-control form-control-user" id="cep"
+                                placeholder="Ex. 88.900-000" name="numero" formControlName="cep">
                         </div>
                         <div class="col-sm-4 mb-3 mb-sm-0">
                             <label for="uf" class="form-label">UF</label>
-                            <select class="form-control form-control-user" id="uf">
-                                <option selected>Acre</option>
-                                <option>Alagoas</option>
-                                <option>Amapá</option>
-                                <option>Amazonas</option>
-                                <option>Bahia</option>
-                                <option>Ceará</option>
-                                <option>Distrito Federal</option>
-                                <option>Espírito Santo</option>
-                                <option>Goiás</option>
-                                <option>Maranhão</option>
-                                <option>Mato Grosso</option>
-                                <option>Mato Grosso do Sul</option>
-                                <option>Minas Gerais</option>
-                                <option>Pará</option>
-                                <option>Paraíba</option>
-                                <option>Paraná</option>
-                                <option>Pernambuco</option>
-                                <option>Piauí</option>
-                                <option>Rio de Janeiro</option>
-                                <option>Rio Grande do Norte</option>
-                                <option>Rio Grande do Sul</option>
-                                <option>Rondônia</option>
-                                <option>Roraima</option>
-                                <option>Santa Catarina</option>
-                                <option>São Paulo</option>
-                                <option>Sergipe</option>
-                                <option>Tocantins</option>
+                            <select class="form-control form-control-user" id="uf" name="numero" formControlName="uf">
+                                <option selected value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
                             </select>
                         </div>
                         <div class="col-sm-4 mb-3 mb-sm-0">
-                            <label for="uf" class="form-label">UF</label>
-                            <input type="text" class="form-control form-control-user" id="uf" placeholder="Ex. 88.900-000">
+                            <label for="cidade" class="form-label">Cidade</label>
+                            <input type="text" class="form-control form-control-user" id="cidade"
+                                placeholder="Ex .São Paulo" name="numero" formControlName="cidade">
                         </div>
                     </div>
 
@@ -77,7 +97,14 @@
                         </div>
                     </div>
 
-                    <a href="login.html" class="btn btn-primary btn-user btn-block">CADASTRAR</a>
+                    <div *ngIf="!hasEndereco">
+                        <button (click)="post()" [disabled]="!this.endereco.valid"
+                            class="btn btn-primary btn-user btn-block">CADASTRAR</button>
+                    </div>
+                    <div *ngIf="hasEndereco">
+                        <button (click)="put()" [disabled]="!this.endereco.valid"
+                            class="btn btn-success btn-user btn-block">ATUALIZAR</button>
+                    </div>
                 </form>
             </div>
         </div>

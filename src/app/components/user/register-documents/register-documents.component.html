@@ -8,7 +8,8 @@
         <div class="card">
             <img src="../../../../assets/img/cad_rg.svg" alt="" class="card-img-top">
             <div class="card-body">
-                <button class="btn btn-dark" (click)="post('rg')">Cadastrar</button>
+                <button *ngIf="!boleanos[7]" class="btn btn-dark" (click)="post('rg')">Cadastrar</button>
+                <button *ngIf="boleanos[7]" class="btn btn-success" (click)="post('rg')">Atualizar</button>
             </div>
         </div>
     </div>
@@ -16,7 +17,8 @@
         <div class="card ">
             <img src="../../../../assets/img/cad_cpf.svg" alt="" class="card-img-top">
             <div class="card-body">
-                <button class="btn btn-dark" (click)="post('cpf')">Cadastrar</button>
+                <button *ngIf="!boleanos[4]" class="btn btn-dark" (click)="post('cpf')">Cadastrar</button>
+                <button *ngIf="boleanos[4]" class="btn btn-success" (click)="post('cpf')">Atualizar</button>
             </div>
         </div>
     </div>
@@ -24,7 +26,8 @@
         <div class="card">
             <img src="../../../../assets/img/cad_eleitor.svg" alt="" class="card-img-top">
             <div class="card-body ">
-                <button class="btn btn-dark" (click)="post('eleitor')">Cadastrar</button>
+                <button *ngIf="!boleanos[8]" class="btn btn-dark" (click)="post('eleitor')">Cadastrar</button>
+                <button *ngIf="boleanos[8]" class="btn btn-success" (click)="post('eleitor')">Atualizar</button>
             </div>
         </div>
     </div>
@@ -32,7 +35,8 @@
         <div class="card">
             <img src="../../../../assets/img/cad_casamento.svg" alt="" class="card-img-top">
             <div class="card-body ">
-                <button class="btn btn-dark" (click)="post('casamento')">Cadastrar</button>
+                <button *ngIf="!boleanos[2]" class="btn btn-dark" (click)="post('casamento')">Cadastrar</button>
+                <button *ngIf="boleanos[2]" class="btn btn-success" (click)="post('casamento')">Atualizar</button>
             </div>
         </div>
     </div>
@@ -40,7 +44,8 @@
         <div class="card">
             <img src="../../../../assets/img/cad_nascimento.svg" alt="" class="card-img-top">
             <div class="card-body ">
-                <button class="btn btn-dark" (click)="post('nascimento')">Cadastrar</button>
+                <button *ngIf="!boleanos[3]" class="btn btn-dark" (click)="post('nascimento')">Cadastrar</button>
+                <button *ngIf="boleanos[3]" class="btn btn-success" (click)="post('nascimento')">Atualizar</button>
             </div>
         </div>
     </div>
@@ -48,7 +53,8 @@
         <div class="card">
             <img src="../../../../assets/img/cad_motorista.svg" alt="" class="card-img-top">
             <div class="card-body ">
-                <button class="btn btn-dark" (click)="post('motorista')">Cadastrar</button>
+                <button *ngIf="!boleanos[0]" class="btn btn-dark" (click)="post('motorista')">Cadastrar</button>
+                <button *ngIf="boleanos[0]" class="btn btn-success" (click)="post('motorista')">Atualizar</button>
             </div>
         </div>
     </div>
@@ -56,7 +62,8 @@
         <div class="card">
             <img src="../../../../assets/img/cad_trabalho.svg" alt="" class="card-img-top">
             <div class="card-body ">
-                <button class="btn btn-dark" (click)="post('trabalho')">Cadastrar</button>
+                <button *ngIf="!boleanos[1]" class="btn btn-dark" (click)="post('trabalho')">Cadastrar</button>
+                <button *ngIf="boleanos[1]" class="btn btn-success" (click)="post('trabalho')">Atualizar</button>
             </div>
         </div>
     </div>
@@ -64,7 +71,8 @@
         <div class="card">
             <img src="../../../../assets/img/cad_endereco.svg" alt="" class="card-img-top">
             <div class="card-body ">
-                <button class="btn btn-dark" (click)="post('endereco')">Cadastrar</button>
+                <button *ngIf="!boleanos[5]" class="btn btn-dark" (click)="post('endereco')">Cadastrar</button>
+                <button *ngIf="boleanos[5]" class="btn btn-success" (click)="post('endereco')">Atualizar</button>
             </div>
         </div>
     </div>
@@ -72,7 +80,8 @@
         <div class="card">
             <img src="../../../../assets/img/cad_outros.svg" alt="" class="card-img-top">
             <div class="card-body ">
-                <button class="btn btn-dark" (click)="post('outros')">Cadastrar</button>
+                <button *ngIf="!boleanos[6]" class="btn btn-dark" (click)="post('outros')">Cadastrar</button>
+                <button *ngIf="boleanos[6]" class="btn btn-success" (click)="post('outros')">Atualizar</button>
             </div>
         </div>
     </div>

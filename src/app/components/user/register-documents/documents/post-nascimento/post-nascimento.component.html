@@ -2,94 +2,104 @@
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <div class="p-5">
-                <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Cadastro de Certidão de Nascimento</h1>
+                <div class="row">
+                    <div class="col-11">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Cadastro de Certidão de Nascimento</h1>
+                        </div>
+                    </div>
+                    <div class="col-1" *ngIf="hasNascimento">
+                        <button class="btn btn-danger btn-user btn-block text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                <path fill-rule="evenodd"
+                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <form class="user">
-
+                <form class="user" [formGroup]="nascimento">
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="numero" class="form-label">Numero da Certidão</label>
-                            <input type="text" class="form-control form-control-user" id="numero" placeholder="Ex. 123456">
+                            <input type="text" class="form-control form-control-user" id="numero"
+                                placeholder="Ex. 123456" name="numero" formControlName="numberDocument">
                         </div>
                         <div class="col-sm-6">
                             <label for="cpf" class="form-label">CPF</label>
-                            <input type="text" class="form-control form-control-user" id="cpf" placeholder="Ex. 123.456.789-09">
+                            <input type="text" class="form-control form-control-user" id="cpf"
+                                placeholder="Ex. 123.456.789-09" name="numero" formControlName="cpf">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="dataNascimento" class="form-label">Data Nascimento</label>
-                            <input type="date" class="form-control form-control-user" id="dataNascimento" placeholder="Ex. 01/01/2020">
+                            <input type="date" class="form-control form-control-user" id="dataNascimento" name="numero"
+                                formControlName="dataNascimento">
                         </div>
                         <div class="col-sm-6">
                             <label for="localNascimento" class="form-label">Local de Nascimento</label>
-                            <input type="text" class="form-control form-control-user" id="localNascimento" placeholder="Ex. Hospital Federal de São Paulo">
+                            <input type="text" class="form-control form-control-user" id="localNascimento"
+                                placeholder="Ex. Hospital Federal de São Paulo" name="numero"
+                                formControlName="localNascimento">
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="sexo" class="form-label">Sexo</label>
-                            <select class="form-control form-control-user" id="sexo">
-                                <option selected>Feminino</option>
-                                <option>Masculino</option>
-                                <option>Outro</option>
+                            <select class="form-control form-control-user" id="sexo" name="numero"
+                                formControlName="sexo">
+                                <option selected value="F">Feminino</option>
+                                <option value="M">Masculino</option>
+                                <option value="O">Outro</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="numeroDnv" class="form-label">Numero DNV</label>
-                            <input type="text" class="form-control form-control-user" id="numeroDnv" placeholder="Ex. 123456">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <label for="regimeBens" class="form-label">Regime de Bens</label>
-                            <select class="form-control form-control-user" id="regimeBens">
-                                <option selected>Comunhão parcial de bens</option>
-                                <option>Comunhão universal de bens</option>
-                                <option>Separação convencional de bens</option>
-                                <option>Separação obrigatória de bens</option>
-                                <option>Participação final nos aquestos</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="observacoes" class="form-label">Observações</label>
-                            <input type="text" class="form-control form-control-user" id="observacoes" placeholder="Ex. observação">
+                            <input type="text" class="form-control form-control-user" id="numeroDnv"
+                                placeholder="Ex. 123456" name="numero" formControlName="numeroDnv">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="filiacao" class="form-label">Filiação</label>
-                        <input type="text" class="form-control form-control-user" id="filiacao" placeholder="Ex. Joao Silva e Maria Silva">
+                        <input type="text" class="form-control form-control-user" id="filiacao"
+                            placeholder="Ex. Joao Silva e Maria Silva" name="numero" formControlName="filiacao">
                     </div>
 
                     <div class="form-group">
                         <label for="avosPaternos" class="form-label">Avós Paternos</label>
-                        <input type="text" class="form-control form-control-user" id="avosPaternos" placeholder="Ex. Joao Silva e Maria Silva">
+                        <input type="text" class="form-control form-control-user" id="avosPaternos"
+                            placeholder="Ex. Joao Silva e Maria Silva" name="numero" formControlName="avosPaternos">
                     </div>
 
                     <div class="form-group">
                         <label for="avosMaternos" class="form-label">Avós Maternos</label>
-                        <input type="text" class="form-control form-control-user" id="avosMaternos" placeholder="Ex. Joao Silva e Maria Silva">
+                        <input type="text" class="form-control form-control-user" id="avosMaternos"
+                            placeholder="Ex. Joao Silva e Maria Silva" name="numero" formControlName="avosMaternos">
                     </div>
 
                     <div class="form-group row">
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="municipioRegistro" class="form-label">Municipio de Registros</label>
-                            <input type="text" class="form-control form-control-user" id="municipioRegistro" placeholder="Ex. São Paulo">
+                            <input type="text" class="form-control form-control-user" id="municipioRegistro"
+                                placeholder="Ex. São Paulo" name="numero" formControlName="municipioDeRegistro">
                         </div>
                         <div class="col-sm-6">
                             <label for="naturalidade" class="form-label">Naturalidade</label>
-                            <input type="text" class="form-control form-control-user" id="naturalidade" placeholder="Ex. São Paulo">
+                            <input type="text" class="form-control form-control-user" id="naturalidade"
+                                placeholder="Ex. São Paulo" name="numero" formControlName="naturalidade">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="observacao" class="form-label">Observações</label>
-                        <input type="text" class="form-control form-control-user" id="observacao" placeholder="Ex. Observação">
+                        <input type="text" class="form-control form-control-user" id="observacao"
+                            placeholder="Ex. Observação" name="numero" formControlName="observacao">
                     </div>
 
                     <div class="form-group row">
@@ -102,8 +112,14 @@
                             <input type="file" class="form-control form-control-user" id="foto2">
                         </div>
                     </div>
-
-                    <a href="login.html" class="btn btn-primary btn-user btn-block">CADASTRAR</a>
+                    <div *ngIf="!hasNascimento">
+                        <button (click)="post()" [disabled]="!this.nascimento.valid"
+                            class="btn btn-primary btn-user btn-block">CADASTRAR</button>
+                    </div>
+                    <div *ngIf="hasNascimento">
+                        <button (click)="put()" [disabled]="!this.nascimento.valid"
+                            class="btn btn-success btn-user btn-block">ATUALIZAR</button>
+                    </div>
                 </form>
             </div>
         </div>

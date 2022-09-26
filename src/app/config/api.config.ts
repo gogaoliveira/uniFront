@@ -1,3 +1,3 @@
 export const API = {
-    baseUrl : 'https://unifica.herokuapp.com'
+    baseUrl : 'http://localhost:8080'
 }

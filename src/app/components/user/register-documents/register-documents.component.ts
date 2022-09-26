@@ -13,40 +13,68 @@ export class RegisterDocumentsComponent implements OnInit {
   documents: String[] = []
   name: String
 
-  rg: boolean
-  cpf: boolean
-  eleitor: boolean
+  itens: String[] = [
+    "CARTEIRA_MOTORISTA",
+    "CARTEIRA_TRABALHO",
+    "CERTIDAO_CASAMENTO",
+    "CERTIDAO_NASCIMENTO",
+    "CPF",
+    "ENDERECO",
+    "OUTROS",
+    "RG",
+    "TITULO_ELEITOR"
+  ]
+
+  CARTEIRA_MOTORISTA: boolean = false
+  CARTEIRA_TRABALHO: boolean = false
+  CERTIDAO_CASAMENTO: boolean = false
+  CERTIDAO_NASCIMENTO: boolean = false
+  CPF: boolean = false
+  ENDERECO: boolean = false
+  OUTROS: boolean = false
+  RG: boolean = false
+  TITULO_ELEITOR: boolean = false
+
+  boleanos: boolean[] = [
+    this.CARTEIRA_MOTORISTA,
+    this.CARTEIRA_TRABALHO,
+    this.CERTIDAO_CASAMENTO,
+    this.CERTIDAO_NASCIMENTO,
+    this.CPF,
+    this.ENDERECO,
+    this.OUTROS,
+    this.RG,
+    this.TITULO_ELEITOR
+  ]
 
 
   constructor(
-    private service: AuthService,
+    private serviceAuth: AuthService,
     private toast: ToastrService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.service.getDateUser()
+    this.serviceAuth.getDateUser()
       .subscribe({
         next: (response) => {
           this.documents = response['documents']
-          this.name = response['name']
+          for (let d = 0; d < this.documents.length; d++) {
+            for (let i = 0; i < this.boleanos.length; i++) {
+              if (this.documents[d]['type'] == this.itens[i]) {
+                this.boleanos[i]= true
+              }
+            }
+          }
         },
         error: () => {
-          this.toast.error('Erro ao tentar cadastrar', 'Erro')
+          this.toast.error('Erro ao buscar dados', 'Erro')
         }
       })
+
   }
 
-  setCad(){
-    for (let index = 0; index < this.documents.length; index++) {
-      if (this.documents[index]['type'] = "RG"){
-        this.rg = true;
-      }
-      
-    }
-  }
-
-  post(page: string){
+  post(page: string) {
     this.router.navigate([`post${page}`])
   }
 

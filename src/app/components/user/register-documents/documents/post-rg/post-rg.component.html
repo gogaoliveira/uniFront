@@ -2,11 +2,23 @@
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <div class="p-5">
-                <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Cadastro de RG</h1>
+                <div class="row">
+                    <div class="col-11">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Cadastro de RG</h1>
+                        </div>
+                    </div>
+                    <div class="col-1" *ngIf="hasRg">
+                        <button class="btn btn-danger btn-user btn-block text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                              </svg>
+                        </button>
+                    </div>
                 </div>
-                <form class="user">
-                    <div class="form-group row">
+                <form class="user" [formGroup]="rg">
+                    <div class="form-group row" >
                         <div class="col-sm-6 mb-3 mb-sm-0">
                             <label for="numero" class="form-label">Numero do RG</label>
                             <input 
@@ -15,8 +27,7 @@
                                 id="numero"
                                 placeholder="Ex. 123456"
                                 name="numero"
-                                [(ngModel)] = "rg.numberDocument"
-                                [formControl]="numero"
+                                formControlName="numberDocument"
                             >
                             
                         </div>
@@ -28,8 +39,7 @@
                                 id="orgaoExpedidor"
                                 placeholder="Ex. SSP/SC"
                                 name="orgaoExpedidor"
-                                [(ngModel)] = "rg.orgaoExpedidor"
-                                [formControl]="orgaoExpedidor"
+                                formControlName=orgaoExpedidor 
                             >
                         </div>
                     </div>
@@ -40,11 +50,10 @@
                                 type="date" 
                                 class="form-control form-control-user" 
                                 id="dataNascimento"
-                                placeholder="Ex. 01/01/2020"
                                 name="dataNascimento"
-                                [(ngModel)] = "rg.dataNascimento"
-                                [formControl]="dataNascimento"
+                                formControlName="dataNascimento"
                                 required
+                                timezone="dd/mm/yyyy"
                             >
                         </div>
                         <div class="col-sm-6">
@@ -53,10 +62,8 @@
                                 type="date" 
                                 class="form-control form-control-user" 
                                 id="dataExpedicao"
-                                placeholder="Ex. 01/01/2020"
                                 name="dataExpedicao"
-                                [(ngModel)] = "rg.dataExpedicao"
-                                [formControl]="dataExpedicao"
+                                formControlName="dataExpedicao"
                                 required
                             >
                         </div>
@@ -69,9 +76,9 @@
                             id="naturalidade"
                             placeholder="Ex. São Paulo"
                             name="naturalidade"
-                            [(ngModel)] = "rg.naturalidade"
-                            [formControl]="naturalidade"
+                            formControlName="naturalidade"
                             required
+                            datatime="dd/mm/yyyy"
                         >
                     </div>
                     <div class="form-group">
@@ -82,8 +89,7 @@
                             id="nomeMae"
                             placeholder="Ex. Maria da Silva"
                             name="nomeMae"
-                            [(ngModel)] = "rg.nomeMae"
-                            [formControl]="nomeMae"
+                            formControlName="nomeMae"
                             required
                         >
                     </div>
@@ -95,8 +101,7 @@
                             id="nomePai"
                             placeholder="Ex. João da Silva"
                             name="nomePai"
-                            [(ngModel)] = "rg.nomePai"
-                            [formControl]="nomePai"
+                            formControlName="nomePai"
                             required
                         >
                     </div>
@@ -119,7 +124,12 @@
                             >
                         </div>
                     </div>
-                    <button [disabled]="!validaCampos()" (click)="newRg()" class="btn btn-primary btn-user btn-block">CADASTRAR</button>
+                    <div *ngIf="!hasRg">
+                        <button (click)="postRg()" [disabled]="!this.rg.valid" class="btn btn-primary btn-user btn-block">CADASTRAR</button>
+                    </div>
+                    <div *ngIf="hasRg"> 
+                        <button (click)="putRg()" [disabled]="!this.rg.valid" class="btn btn-success btn-user btn-block">ATUALIZAR</button>
+                    </div>
                 </form>
             </div>
         </div>
