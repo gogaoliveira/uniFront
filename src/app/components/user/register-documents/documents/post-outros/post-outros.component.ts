@@ -67,11 +67,11 @@ export class PostOutrosComponent implements OnInit {
     this.serviceDoc.post(this.outros.value, "outros")
       .subscribe({
         next: (res) => {
-          this.toast.info('sucesso')
+          this.toast.info('Documento cadastrado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: (error) => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao cadastrar este Documento')
         }
       })
   }
@@ -80,13 +80,29 @@ export class PostOutrosComponent implements OnInit {
     this.serviceDoc.update(this.outros.value, this.documentId, "outros")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
+          this.toast.info('Documento atualizado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: (error) => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao atualizar este Documento')
         }
       })
+  }
+
+  delete() {
+    if (confirm("Deseja Excluir Documento cadastrado?")) {
+      this.serviceDoc.delete(this.documentId)
+        .subscribe({
+          next: () => {
+            this.toast.info('Documento excluido com sucesso')
+            this.router.navigate(['cadastrar']);
+          },
+          error: () => {
+            this.toast.error('Erro ao excluir este Documento')
+          }
+        })
+
+    }
   }
 
 }

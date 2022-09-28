@@ -1,11 +1,10 @@
 <h1 class="m-4 pt-5">Olá, {{name}}</h1>
 
-<!-- ---------------------RG------------------- -->
 <div class="card mb-1 ml-3" *ngFor="let doc of documents">
     <a class="card-header cinzaGradiente" href="#{{doc['type']}}" data-bs-toggle="collapse">
         <div class="row">
             <div class="col-9 text-light">
-                {{doc['type'][0] + doc['type'].toLowerCase().slice(1).replace("_"," de ")}}
+                {{doc['name'] == 'Outros' ? doc['nomeDocumento'] : doc['name']}}
             </div>
             <div class="col-md-1">
                 <a class="small text-light stretched-link" href="">
@@ -210,10 +209,6 @@
 
                 <!-------OUTROS-------->
                 <tbody *ngIf="doc['type'] == 'OUTROS'">
-                    <tr>
-                        <td>Nome do Documento</td>
-                        <td>{{doc['nomeDocumento']}}</td>
-                    </tr>
                     <tr>
                         <td>Numero</td>
                         <td>{{doc['numberDocument']}}</td>

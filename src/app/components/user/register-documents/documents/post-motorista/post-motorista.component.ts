@@ -75,11 +75,11 @@ export class PostMotoristaComponent implements OnInit {
     this.serviceDoc.post(this.motorista.value, "motorista")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
+          this.toast.info('Carteira de Motorista cadastrado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: () => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao cadastrar Carteira de Motorista')
         }
       })
   }
@@ -90,13 +90,29 @@ export class PostMotoristaComponent implements OnInit {
     this.serviceDoc.update(this.motorista.value, this.documentId, "motorista")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
+          this.toast.info('Carteira de Motorista atualizado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: () => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao atualizar Carteira de Motorista')
         }
       })
+  }
+
+  delete() {
+    if (confirm("Deseja Excluir Carteira de Motorista cadastrado?")) {
+      this.serviceDoc.delete(this.documentId)
+        .subscribe({
+          next: () => {
+            this.toast.info('Carteira de Motorista excluido com sucesso')
+            this.router.navigate(['cadastrar']);
+          },
+          error: () => {
+            this.toast.error('Erro ao excluir Carteira de Motorista')
+          }
+        })
+
+    }
   }
 
 }

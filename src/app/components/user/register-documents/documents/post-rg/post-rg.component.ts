@@ -77,29 +77,45 @@ export class PostRgComponent implements OnInit {
     return date.toString().slice(0, 10)
   }
 
-  postRg() {
+  post() {
     this.serviceDoc.post(this.rg.value, "rg")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
+          this.toast.info('RG cadastrado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: () => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao cadastrar RG')
         }
       })
   }
 
-  putRg() {
+  put() {
     this.serviceDoc.update(this.rg.value, this.documentId, "rg")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
+          this.toast.info('RG atualizado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: () => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao atualizar RG')
         }
       })
+  }
+
+  delete() {
+    if (confirm("Deseja Excluir RG cadastrado?")) {
+      this.serviceDoc.delete(this.documentId)
+        .subscribe({
+          next: () => {
+            this.toast.info('RG excluido com sucesso')
+            this.router.navigate(['cadastrar']);
+          },
+          error: () => {
+            this.toast.error('Erro ao excluir RG')
+          }
+        })
+
+    }
   }
 }

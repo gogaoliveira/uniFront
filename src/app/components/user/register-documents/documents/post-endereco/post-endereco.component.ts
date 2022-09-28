@@ -75,11 +75,11 @@ export class PostEnderecoComponent implements OnInit {
     this.serviceDoc.post(this.endereco.value, "endereco")
       .subscribe({
         next: (res) => {
-          this.toast.info('sucesso')
+          this.toast.info('Endereço cadastrado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: (error) => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao cadastrar Endereço')
         }
       })
   }
@@ -88,13 +88,29 @@ export class PostEnderecoComponent implements OnInit {
     this.serviceDoc.update(this.endereco.value, this.documentId, "endereco")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
+          this.toast.info('Endereço atualizado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: (error) => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao atualizar Endereço')
         }
       })
+  }
+
+  delete() {
+    if (confirm("Deseja Excluir Endereço cadastrado?")) {
+      this.serviceDoc.delete(this.documentId)
+        .subscribe({
+          next: () => {
+            this.toast.info('Endereço excluido com sucesso')
+            this.router.navigate(['cadastrar']);
+          },
+          error: () => {
+            this.toast.error('Erro ao excluir Endereço')
+          }
+        })
+
+    }
   }
 
 }

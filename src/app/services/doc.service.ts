@@ -22,4 +22,10 @@ export class DocService {
     var header = { headers: new HttpHeaders().set('Authorization', `Bearer ${token}`) }
     return this.http.put(`${API.baseUrl}/documentos/${doc}/${id}`, obj, header)
   }
+
+  delete(id: number){
+    let token = localStorage.getItem('token')
+    var header = { headers: new HttpHeaders().set('Authorization', `Bearer ${token}`) }
+    return this.http.delete(`${API.baseUrl}/documentos/${id}`, header)
+  }
 }

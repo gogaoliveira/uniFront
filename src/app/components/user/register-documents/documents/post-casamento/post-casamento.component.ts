@@ -48,7 +48,7 @@ export class PostCasamentoComponent implements OnInit {
                 regimeBens: this.documents[i]['regimeBens'],
                 observacoes: this.documents[i]['observacoes']
               })
-              
+
             }
           }
         }
@@ -74,18 +74,18 @@ export class PostCasamentoComponent implements OnInit {
   }
 
   dataFormat(date: Date) {
-    return date.toString().slice(0,10)
+    return date.toString().slice(0, 10)
   }
 
   post() {
     this.serviceDoc.post(this.casamento.value, "casamento")
       .subscribe({
         next: (res) => {
-          this.toast.info('sucesso')
+          this.toast.info('Certidão de Casamento cadastrado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: (error) => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao cadastrar Certidão de Casamento')
         }
       })
   }
@@ -94,13 +94,29 @@ export class PostCasamentoComponent implements OnInit {
     this.serviceDoc.update(this.casamento.value, this.documentId, "casamento")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
+          this.toast.info('Certidão de Casamento atualizado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: (error) => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao atualizar Certidão de Casamento')
         }
       })
+  }
+
+  delete() {
+    if (confirm("Deseja Excluir Certidão de Casamento cadastrado?")) {
+      this.serviceDoc.delete(this.documentId)
+        .subscribe({
+          next: () => {
+            this.toast.info('Certidão de Casamento excluido com sucesso')
+            this.router.navigate(['cadastrar']);
+          },
+          error: () => {
+            this.toast.error('Erro ao excluir Certidão de Casamento')
+          }
+        })
+
+    }
   }
 
 }

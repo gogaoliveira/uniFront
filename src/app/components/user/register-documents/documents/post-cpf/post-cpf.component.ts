@@ -57,7 +57,7 @@ export class PostCpfComponent implements OnInit {
   }
 
   dataFormat(date: Date) {
-    return date.toString().slice(0,10)
+    return date.toString().slice(0, 10)
   }
 
   post() {
@@ -84,6 +84,22 @@ export class PostCpfComponent implements OnInit {
           this.toast.error('Erro')
         }
       })
+  }
+
+  delete() {
+    if (confirm("Deseja Excluir CPF cadastrado?")) {
+      this.serviceDoc.delete(this.documentId)
+        .subscribe({
+          next: () => {
+            this.toast.info('CPF excluido com sucesso')
+            this.router.navigate(['cadastrar']);
+          },
+          error: () => {
+            this.toast.error('Erro ao excluir documento')
+          }
+        })
+
+    }
   }
 
 }

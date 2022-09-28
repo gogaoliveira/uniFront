@@ -42,7 +42,7 @@ export class PostTrabalhoComponent implements OnInit {
                 serie: this.documents[i]['serie'],
                 uf: this.documents[i]['uf'],
               })
-              
+
             }
           }
         }
@@ -62,18 +62,18 @@ export class PostTrabalhoComponent implements OnInit {
   }
 
   dataFormat(date: Date) {
-    return date.toString().slice(0,10)
+    return date.toString().slice(0, 10)
   }
 
   post() {
     this.serviceDoc.post(this.trabalho.value, "trabalho")
       .subscribe({
-        next: (res) => {
-          this.toast.info('sucesso')
+        next: () => {
+          this.toast.info('Carteira de Trabalho cadastrado com sucesso')
           this.router.navigate(['cadastrar']);
         },
-        error: (error) => {
-          this.toast.error('Erro')
+        error: () => {
+          this.toast.error('Erro ao cadastrar Carteira de Trabalho')
         }
       })
   }
@@ -82,13 +82,29 @@ export class PostTrabalhoComponent implements OnInit {
     this.serviceDoc.update(this.trabalho.value, this.documentId, "trabalho")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
+          this.toast.info('Carteira de Trabalho atualizado com sucesso')
           this.router.navigate(['cadastrar']);
         },
-        error: (error) => {
-          this.toast.error('Erro')
+        error: () => {
+          this.toast.error('Erro ao atualizar Carteira de Trabalho')
         }
       })
+  }
+
+  delete() {
+    if (confirm("Deseja Excluir Carteira de Trabalho cadastrado?")) {
+      this.serviceDoc.delete(this.documentId)
+        .subscribe({
+          next: () => {
+            this.toast.info('Carteira de Trabalho excluido com sucesso')
+            this.router.navigate(['cadastrar']);
+          },
+          error: () => {
+            this.toast.error('Erro ao excluir Carteira de Trabalho')
+          }
+        })
+
+    }
   }
 
 }

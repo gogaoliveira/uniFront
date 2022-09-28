@@ -2,17 +2,14 @@
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
             <div class="p-5">
-                <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Cadastro de Certidão de Nascimento</h1>
-                </div>
                 <div class="row">
                     <div class="col-11">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Cadastro de CPF</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Cadastro de Documento</h1>
                         </div>
                     </div>
                     <div class="col-1" *ngIf="hasOutros">
-                        <button class="btn btn-danger btn-user btn-block text-center">
+                        <button (click)="delete()" class="btn btn-danger btn-user btn-block text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash" viewBox="0 0 16 16">
                                 <path

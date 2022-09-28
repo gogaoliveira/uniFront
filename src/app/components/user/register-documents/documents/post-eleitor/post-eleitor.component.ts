@@ -58,25 +58,25 @@ export class PostEleitorComponent implements OnInit {
       user: [Number(localStorage.getItem('user'))],
       dataNascimento: [null],
       dataEmissao: [null],
-      zona: ['', [ Validators.required]],
-      secao: ['', [ Validators.required]],
-      municipio: ['', [ Validators.required]]
+      zona: ['', [Validators.required]],
+      secao: ['', [Validators.required]],
+      municipio: ['', [Validators.required]]
     })
   }
 
   dataFormat(date: Date) {
-    return date.toString().slice(0,10)
+    return date.toString().slice(0, 10)
   }
 
   post() {
     this.serviceDoc.post(this.eleitor.value, "eleitor")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
+          this.toast.info('Titulo de Eleitor cadastrado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: () => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao cadastrar Titulo de Eleitor')
         }
       })
   }
@@ -85,13 +85,29 @@ export class PostEleitorComponent implements OnInit {
     this.serviceDoc.update(this.eleitor.value, this.documentId, "eleitor")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
+          this.toast.info('Titulo de Eleitor atualizado com sucesso')
           this.router.navigate(['cadastrar']);
         },
         error: () => {
-          this.toast.error('Erro')
+          this.toast.error('Erro ao atualizar Titulo de Eleitor')
         }
       })
+  }
+
+  delete() {
+    if (confirm("Deseja Excluir Titulo de Eleitor cadastrado?")) {
+      this.serviceDoc.delete(this.documentId)
+        .subscribe({
+          next: () => {
+            this.toast.info('Titulo de Eleitor excluido com sucesso')
+            this.router.navigate(['cadastrar']);
+          },
+          error: () => {
+            this.toast.error('Erro ao excluir Titulo de Eleitor')
+          }
+        })
+
+    }
   }
 
 }
