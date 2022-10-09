@@ -31,7 +31,6 @@ export class PostMotoristaComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.documents = response['documents']
-          console.log(this.documents)
           for (let i = 0; i < this.documents.length; i++) {
             if (this.documents[i]['type'] == 'CARTEIRA_MOTORISTA') {
               this.hasMotorista = true
@@ -85,8 +84,7 @@ export class PostMotoristaComponent implements OnInit {
   }
 
   put() {
-    console.log(this.motorista.value)
-    console.log(this.documentId)
+
     this.serviceDoc.update(this.motorista.value, this.documentId, "motorista")
       .subscribe({
         next: () => {

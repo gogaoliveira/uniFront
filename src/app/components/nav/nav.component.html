@@ -6,15 +6,21 @@
                 <i class="material-icons">home</i>
                 Home
             </a>
-            <a mat-list-item routerLink="cadastrar">
+            <a mat-list-item routerLink="cadastrar" *ngIf="profile == 'USUARIO'">
                 <i class="material-icons">edit</i>
                 Cadastros
             </a>
-            <a mat-list-item routerLink="request">
+            <a mat-list-item routerLink="pedidos" *ngIf="profile == 'USUARIO'">
                 <i class="material-icons">note_add</i>
                 Pedidos
+                <p class="notification" *ngIf="cont > 0">{{cont}}</p>
             </a>
-            <a mat-list-item routerLink="home">
+            <a mat-list-item routerLink="pedidosempresa" *ngIf="profile == 'EMPRESA'">
+                <i class="material-icons">note_add</i>
+                Pedidos
+                <p class="notification" *ngIf="cont > 0">{{cont}}</p>
+            </a>
+            <a mat-list-item routerLink="historico" *ngIf="profile == 'USUARIO'">
                 <i class="material-icons">history</i>
                 Historico
             </a>

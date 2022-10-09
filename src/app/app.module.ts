@@ -47,6 +47,10 @@ import { PostEnderecoComponent } from './components/user/register-documents/docu
 import { PostOutrosComponent } from './components/user/register-documents/documents/post-outros/post-outros.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { RequestComponent } from './components/user/request/request.component';
+import { SearchDocumentsComponent } from './components/company/search-documents/search-documents.component';
+import { HistoryComponent } from './components/user/history/history.component';
+import { RequestCompanyComponent } from './components/company/request-company/request-company.component';
+import { ViewDocumentsComponent } from './components/company/view-documents/view-documents.component';
 
 
 @NgModule({
@@ -67,7 +71,11 @@ import { RequestComponent } from './components/user/request/request.component';
     PostTrabalhoComponent,
     PostEnderecoComponent,
     PostOutrosComponent,
-    RequestComponent
+    RequestComponent,
+    SearchDocumentsComponent,
+    HistoryComponent,
+    RequestCompanyComponent,
+    ViewDocumentsComponent
   ],
   imports: [
     BrowserModule,

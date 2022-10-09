@@ -38,3 +38,12 @@ button{
     position: fixed;
     top:0px;
 }
+
+.notification{
+    display: flex;
+    background-color: rgb(205, 5, 5);
+    margin-left: 2vh;
+    margin-top: 1.5vh;
+    padding: 2px 8px;
+    border-radius: 50%;
+}

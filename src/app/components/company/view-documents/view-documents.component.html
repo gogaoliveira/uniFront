@@ -1,0 +1,280 @@
+<h1 class="m-4 pt-5">Usuario: {{name}}</h1>
+
+<div class="card mb-1 ml-3" *ngFor="let doc of documents">
+    <a class="card-header cinzaGradiente" href="#{{doc['type']}}" data-bs-toggle="collapse">
+        <div class="row">
+            <div class="col-9 text-light">
+                {{doc['name'] == 'Outros' ? doc['nomeDocumento'] : doc['name']}}
+            </div>
+            <div class="col-md-1">
+                <a class="small text-light stretched-link" href="">
+                    <i class="fa fa-file-download"></i> upload foto
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a class="small text-light stretched-link" href="">
+                    <i class="fa fa-images"></i> ver foto (frente)
+                </a>
+            </div>
+            <div class="col-md-1">
+                <a class="small text-light stretched-link" href="">
+                    <i class="fa fa-images"></i> ver foto (verso)
+                </a>
+            </div>
+        </div>
+    </a>
+    <div class="card-body collapse" id="{{doc['type']}}">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <!-------CARTEIRA DE MOTORISTA-------->
+                <tbody *ngIf="doc['type'] == 'CARTEIRA_MOTORISTA'">
+                    <tr>
+                        <td>Numero</td>
+                        <td>{{doc['numberDocument'] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Validade</td>
+                        <td>{{dataFormat(doc['validade'])}}</td>
+                    </tr>
+                    <tr>
+                        <td>Primeira Habilitação</td>
+                        <td>{{dataFormat(doc['primeiraHabilitacao'])}}</td>
+                    </tr>
+                    <tr>
+                        <td>Categoria</td>
+                        <td>{{doc['categoria']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Permissão</td>
+                        <td>{{doc['permissao']}}</td>
+                    </tr>
+                    <tr>
+                        <td>ACC</td>
+                        <td>{{doc['acc']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Observações</td>
+                        <td>{{doc['observacoes'] == null ? "Sem Observações" : doc['observacoes']}}</td>
+                    </tr>
+                </tbody>
+
+                <!-------CARTEIRA DE TRABALHO-------->
+                <tbody *ngIf="doc['type'] == 'CARTEIRA_TRABALHO'">
+                    <tr>
+                        <td>Numero</td>
+                        <td>{{doc['numberDocument']}}</td>
+                    </tr>
+                    <tr>
+                        <td>PIS</td>
+                        <td>{{doc['pis']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Serie</td>
+                        <td>{{doc['serie']}}</td>
+                    </tr>
+                    <tr>
+                        <td>UF</td>
+                        <td>{{doc['uf']}}</td>
+                    </tr>
+                </tbody>
+
+                <!-------CERTIDAO DE CASAMENTO-------->
+                <tbody *ngIf="doc['type'] == 'CERTIDAO_CASAMENTO'">
+                    <tr>
+                        <td>Numero</td>
+                        <td>{{doc['numberDocument']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nome Conjuge</td>
+                        <td>{{doc['nomeConjuge']}}</td>
+                    </tr>
+                    <tr>
+                        <td>CPF do Conjuge</td>
+                        <td>{{doc['cpfConjuge']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nascimento do Conjuge</td>
+                        <td>{{dataFormat(doc['nascimentoConjuge'])}}</td>
+                    </tr>
+                    <tr>
+                        <td>Cidade Nascimento do Conjuge</td>
+                        <td>{{doc['cidadeNascimentoConjuge']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Pai do Conjuge</td>
+                        <td>{{doc['paiConjunge']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Mãe do Conjuge</td>
+                        <td>{{doc['maeConjuge']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Data do Casamento</td>
+                        <td>{{dataFormat(doc['dataCasamento'])}}</td>
+                    </tr>
+                    <tr>
+                        <td>Regime de Bens</td>
+                        <td>{{doc['regimeBens']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Observações</td>
+                        <td>{{doc['observacoes']}}</td>
+                    </tr>
+                </tbody>
+
+                <!-------CERTIDAO DE NASCIMENTO-------->
+                <tbody *ngIf="doc['type'] == 'CERTIDAO_NASCIMENTO'">
+                    <tr>
+                        <td>Numero</td>
+                        <td>{{doc['numberDocument']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tipo</td>
+                        <td>{{doc['tipo']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Data de Nascimento</td>
+                        <td>{{dataFormat(doc['dataNascimento'])}}</td>
+                    </tr>
+                    <tr>
+                        <td>Sexo</td>
+                        <td>{{doc['sexo'] == "M" ? "Masculino" : "Feminino"}}</td>
+                    </tr>
+                    <tr>
+                        <td>Filiação</td>
+                        <td>{{doc['filiacao']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Avos Paternos</td>
+                        <td>{{doc['avosPaternos']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Avos Maternos</td>
+                        <td>{{doc['avosMaternos']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Numero DNV</td>
+                        <td>{{doc['numeroDnv']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Municipio de Registro</td>
+                        <td>{{doc['municipioDeRegistro']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Naturalidade</td>
+                        <td>{{doc['naturalidade']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Observação</td>
+                        <td>{{doc['observacao']}}</td>
+                    </tr>
+                </tbody>
+
+                <!-------CPF-------->
+                <tbody *ngIf="doc['type'] == 'CPF'">
+                    <tr>
+                        <td>Numero</td>
+                        <td>{{doc['numberDocument']}}</td>
+                    </tr>
+                </tbody>
+
+                <!-------ENDERECO-------->
+                <tbody *ngIf="doc['type'] == 'ENDERECO'">
+                    <tr>
+                        <td>Endereço</td>
+                        <td>{{doc['endereco']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Numero</td>
+                        <td>{{doc['numero']}}</td>
+                    </tr>
+                    <tr>
+                        <td>CEP</td>
+                        <td>{{doc['cep']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Complemento</td>
+                        <td>{{doc['complemento']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Cidade</td>
+                        <td>{{doc['cidade']}}</td>
+                    </tr>
+                    <tr>
+                        <td>UF</td>
+                        <td>{{doc['uf']}}</td>
+                    </tr>
+                </tbody>
+
+                <!-------OUTROS-------->
+                <tbody *ngIf="doc['type'] == 'OUTROS'">
+                    <tr>
+                        <td>Numero</td>
+                        <td>{{doc['numberDocument']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Observações
+                        <td>{{doc['dados']}}</td>
+                    </tr>
+                </tbody>
+
+                <!-------RG-------->
+                <tbody *ngIf="doc['type'] == 'RG'">
+                    <tr>
+                        <td>Numero</td>
+                        <td>{{doc['numberDocument']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Data de Expedição</td>
+                        <td>{{dataFormat(doc['dataExpedicao'])}}</td>
+                    </tr>
+                    <tr>
+                        <td>Data de Nascimento</td>
+                        <td>{{dataFormat(doc['dataNascimento'])}}</td>
+                    </tr>
+                    <tr>
+                        <td>Naturalidade</td>
+                        <td>{{doc['naturalidade']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nome da Mãe</td>
+                        <td>{{doc['nomeMae']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nome do Pai</td>
+                        <td>{{doc['nomePai']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Orgão Expedidor</td>
+                        <td>{{doc['orgaoExpedidor']}}</td>
+                    </tr>
+                </tbody>
+
+                <!-------TITULO DE ELEITOR-------->
+                <tbody *ngIf="doc['type'] == 'TITULO_ELEITOR'">
+                    <tr>
+                        <td>Numero</td>
+                        <td>{{doc['numberDocument']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Data de Emissão</td>
+                        <td>{{dataFormat(doc['dataEmissao'])}}</td>
+                    </tr>
+                    <tr>
+                        <td>Zona</td>
+                        <td>{{doc['zona']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Seção</td>
+                        <td>{{doc['secao']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Municipio</td>
+                        <td>{{doc['municipio']}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  creds: Credenciais ={
+  creds: Credenciais = {
     email: '',
     password: ''
   }
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   email = new FormControl(null, Validators.email);
   password = new FormControl(null, Validators.minLength(3));
 
-  constructor( 
+  constructor(
     private toast: ToastrService,
     private service: AuthService,
     private router: Router) { }
@@ -29,25 +29,29 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  logar(){
+  logar() {
     this.service.authenticate(this.creds)
       .subscribe({
-        next:  (resposta) => {
-          this.service.successfulllogin(resposta.headers.get('Authorization').substring(7), resposta.headers.get('user'));
+        next: (resposta) => {
+          this.service.successfulllogin(
+            resposta.headers.get('Authorization').substring(7), 
+            resposta.headers.get('user'),
+            resposta.headers.get('profile').substring(6,13)
+          );
           this.router.navigate(['home']);
         },
-        error: () => { 
+        error: () => {
           this.toast.error('Usuário e/ou senha inválidos', 'login'),
-          this.creds.password = ''
+            this.creds.password = ''
         }
       });
   }
 
-  validaCampos(): boolean{
+  validaCampos(): boolean {
     return (this.email.valid && this.password.valid);
   }
 
-  register(){
+  register() {
     this.router.navigate(['register'])
   }
 

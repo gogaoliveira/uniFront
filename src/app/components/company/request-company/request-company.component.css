@@ -1,0 +1,8 @@
+.access{
+    color: #fff;
+    cursor: pointer;
+}
+
+.access:hover{
+    color: rgb(29, 0, 95);
+}

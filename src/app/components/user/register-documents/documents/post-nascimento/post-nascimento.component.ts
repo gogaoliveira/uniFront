@@ -96,8 +96,6 @@ export class PostNascimentoComponent implements OnInit {
   }
 
   put() {
-    console.log(this.nascimento.value)
-    console.log(this.documentId)
     this.serviceDoc.update(this.nascimento.value, this.documentId, "nascimento")
       .subscribe({
         next: () => {

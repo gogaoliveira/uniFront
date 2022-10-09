@@ -1,0 +1,23 @@
+
+<div class="row m-5 p-5">
+    <div class="col-sm-12" *ngFor="let req of requestFilter">
+        <div class="card bg-light mb-4">
+            <div class="card-header">
+                <div >
+                    <div ><h1><b>{{req['userCompany']['name']}}</b></h1></div>
+                    <div >CNPJ: <b>{{req['userCompany']['cpf']}}</b></div>
+                </div>
+            </div>
+            <div class="card-body ">
+                <p class="card-text">Data do Envio: <b>{{dataFormat(req['date'])}}</b></p>
+                <p class="card-text">Email: <b>{{req['userCompany']['email']}}</b></p>
+            </div>
+            <div class="card-footer bg-danger text-center" *ngIf="req['state'] == 'REFUSED'">
+                <h1 class="text-light">Recusado</h1>
+            </div>
+            <div class="card-footer bg-info text-center" *ngIf="req['state'] == 'APPROVED'">
+                <h1 class="text-light">Aprovado</h1>
+            </div>
+        </div>
+    </div>
+</div>

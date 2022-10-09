@@ -25,9 +25,10 @@ export class AuthService {
     return this.http.post(`${API.baseUrl}/usuarios`, register)
   }
 
-  successfulllogin(authToken: string, user: string){
+  successfulllogin(authToken: string, user: string, profile: string){
     localStorage.setItem('token', authToken);
     localStorage.setItem('user', user);
+    localStorage.setItem('profile', profile);
   }
 
   isAuthenticated(){

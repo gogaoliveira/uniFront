@@ -1,5 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -12,8 +13,10 @@ export class HomeComponent implements OnInit {
 
   documents: String[] = []
   name: String
+  profile: String
 
   constructor(
+    private router:Router,
     private service: AuthService,
     private toast: ToastrService
   ) { }
@@ -24,6 +27,7 @@ export class HomeComponent implements OnInit {
         next: (response) => {
           this.documents = response['documents']
           this.name = response['name']
+          this.profile = response['profile']
         },
         error: () => {
           this.toast.error('Erro ao tentar cadastrar', 'Erro')
@@ -37,6 +41,14 @@ export class HomeComponent implements OnInit {
       mes = (data.getMonth() + 1).toString().padStart(2, '0'),
       ano = data.getFullYear();
     return dia + "-" + mes + "-" + ano;
+  }
+
+  buscarDoc(){
+    this.router.navigate(['buscar'])
+  }
+
+  pedidosDoc(){
+    this.router.navigate(['pedidosempresa'])
   }
 
 

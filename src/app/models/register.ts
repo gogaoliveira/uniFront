@@ -3,4 +3,5 @@ export interface RegisterCPF{
     email: string;
     cpf: String;
     password: string;
+    profile: Number[];
 }
