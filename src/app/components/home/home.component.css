@@ -11,7 +11,7 @@
     display: contents;
 }
 
-img{
-    height: 50vh;
-    width: 50vh;
+.imgDocument{
+    height: 10vh;
+    width: 15vh;
 }

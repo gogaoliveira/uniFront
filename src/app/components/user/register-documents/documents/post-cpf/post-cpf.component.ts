@@ -1,7 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { API } from 'src/app/config/api.config';
 import { AuthService } from 'src/app/services/auth.service';
 import { DocService } from 'src/app/services/doc.service';
 
@@ -16,13 +18,16 @@ export class PostCpfComponent implements OnInit {
   documents: String[] = []
   hasCpf: boolean = false
   documentId: number
+  photo1: File = null
+  photo2: File = null
 
   constructor(
     private formBuilder: FormBuilder,
     private serviceAuth: AuthService,
     private serviceDoc: DocService,
     private toast: ToastrService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -50,10 +55,17 @@ export class PostCpfComponent implements OnInit {
     this.cpf = this.formBuilder.group({
       type: ['CPF'],
       numberDocument: ['', [Validators.minLength(3), Validators.required]],
-      photoDocument: 'testeFoto.jpg',
       user: [Number(localStorage.getItem('user'))],
-      dataNascimento: [null]
+      dataNascimento: [null],
     })
+  }
+
+  onChangePhoto1(event) {
+    this.photo1 = event.target.files[0]
+  }
+
+  onChangePhoto2(event) {
+    this.photo2 = event.target.files[0]
   }
 
   dataFormat(date: Date) {
@@ -61,24 +73,72 @@ export class PostCpfComponent implements OnInit {
   }
 
   post() {
-    this.serviceDoc.post(this.cpf.value, "rg")
+    let token = localStorage.getItem('token')
+
+    let headers: HttpHeaders = new HttpHeaders()
+    headers.append('Authorization', `Bearer ${token}`)
+
+    let formData: FormData = new FormData()
+    formData.append('photo1', this.photo1)
+    formData.append('photo2', this.photo2)
+
+    this.http.post(`${API.baseUrl}/documentos/cpf`, this.cpf.value, { headers: headers, observe: "response", responseType: "text" })
       .subscribe({
-        next: () => {
-          this.toast.info('sucesso')
-          this.router.navigate(['cadastrar']);
+        next: (response) => {
+          this.documentId = Number(response.headers.get('idDocument'))
+          if (this.photo1 == null && this.photo2 == null) {
+            this.toast.info('sucesso')
+            this.router.navigate(['cadastrar']);
+          } else {
+            this.http.post(`${API.baseUrl}/documentos/cpf/img/${this.documentId}`, formData, { headers })
+              .subscribe({
+                next: () => {
+                  this.toast.info('sucesso')
+                  this.router.navigate(['cadastrar'])
+                },
+                error: (error) => {
+                  console.log("Erro: " + error)
+                  this.toast.error('Erro')
+                }
+              })
+          }
         },
-        error: () => {
+        error: (error) => {
+          console.log("Erro: " + error)
           this.toast.error('Erro')
         }
       })
   }
 
   put() {
-    this.serviceDoc.update(this.cpf.value, this.documentId, "rg")
+    let token = localStorage.getItem('token')
+
+    let headers: HttpHeaders = new HttpHeaders()
+    headers.append('Authorization', `Bearer ${token}`)
+
+    let formData: FormData = new FormData()
+    formData.append('photo1', this.photo1)
+    formData.append('photo2', this.photo2)
+
+    this.serviceDoc.update(this.cpf.value, this.documentId, "cpf")
       .subscribe({
         next: () => {
-          this.toast.info('sucesso')
-          this.router.navigate(['cadastrar']);
+          if (this.photo1 == null && this.photo2 == null) {
+            this.toast.info('sucesso')
+            this.router.navigate(['cadastrar']);
+          }else{
+            this.http.post(`${API.baseUrl}/documentos/cpf/img/${this.documentId}`, formData, { headers })
+              .subscribe({
+                next: () => {
+                  this.toast.info('sucesso')
+                  this.router.navigate(['cadastrar'])
+                },
+                error: (error) => {
+                  console.log("Erro: " + error)
+                  this.toast.error('Erro')
+                }
+              })
+          }
         },
         error: () => {
           this.toast.error('Erro')

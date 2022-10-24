@@ -13,7 +13,7 @@ export class DocService {
 
   post(obj: FormGroup, doc: string) {
     let token = localStorage.getItem('token')
-    var header = { headers: new HttpHeaders().set('Authorization', `Bearer ${token}`) }
+    var header = { headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)}
     return this.http.post(`${API.baseUrl}/documentos/${doc}`, obj, header)
   }
 
@@ -22,6 +22,15 @@ export class DocService {
     var header = { headers: new HttpHeaders().set('Authorization', `Bearer ${token}`) }
     return this.http.put(`${API.baseUrl}/documentos/${doc}/${id}`, obj, header)
   }
+
+  updatePriv(obj: any, id: number, doc: string) {
+    let token = localStorage.getItem('token')
+    var header = { headers: new HttpHeaders().set('Authorization', `Bearer ${token}`) }
+    console.log('url')
+    console.log(`${API.baseUrl}/documentos/${doc}/${id}`)
+    return this.http.put(`${API.baseUrl}/documentos/${doc}/${id}`, obj, header)
+  }
+
 
   delete(id: number){
     let token = localStorage.getItem('token')
