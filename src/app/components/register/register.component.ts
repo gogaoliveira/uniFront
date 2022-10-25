@@ -13,6 +13,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
+  checked = false
+
   register: RegisterCPF = {
     name: '',
     email: '',
@@ -51,6 +53,10 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['login'])
   }
 
+  check(){
+    this.checked = this.checked == false ? true : false 
+  }
+
   validaSenha() {
     this.confirm = this.register.password === "" && this.passwordConfirm === undefined
     return this.register.password == this.passwordConfirm || this.confirm
@@ -61,7 +67,8 @@ export class RegisterComponent implements OnInit {
     return (this.nome.valid &&
       this.email.valid &&
       this.register.password == this.passwordConfirm &&
-      !this.confirm
+      !this.confirm &&
+      this.checked
     );
   }
 
@@ -115,9 +122,9 @@ export class RegisterComponent implements OnInit {
       .subscribe({
         next: (resposta) => {
           this.service.successfulllogin(
-                          resposta.headers.get('Authorization').substring(7), 
-                          resposta.headers.get('user'),
-                          resposta.headers.get('profile').substring(6,13));
+            resposta.headers.get('Authorization').substring(7),
+            resposta.headers.get('user'),
+            resposta.headers.get('profile').substring(6, 13));
           this.router.navigate(['home']);
         },
         error: () => {
@@ -125,6 +132,12 @@ export class RegisterComponent implements OnInit {
             this.creds.password = ''
         }
       });
+  }
+
+  termos(){
+    const host: string = location.origin;
+    const url: string= host  + String(this.router.createUrlTree(['termos']));
+    window.open(url, '_blank');
   }
 
 }

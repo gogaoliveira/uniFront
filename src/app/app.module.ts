@@ -11,7 +11,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 // Imports para componentes do Angular Material
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -51,6 +50,7 @@ import { SearchDocumentsComponent } from './components/company/search-documents/
 import { HistoryComponent } from './components/user/history/history.component';
 import { RequestCompanyComponent } from './components/company/request-company/request-company.component';
 import { ViewDocumentsComponent } from './components/company/view-documents/view-documents.component';
+import { PageLgpdComponent } from './components/page-lgpd/page-lgpd.component';
 
 
 @NgModule({
@@ -75,7 +75,8 @@ import { ViewDocumentsComponent } from './components/company/view-documents/view
     SearchDocumentsComponent,
     HistoryComponent,
     RequestCompanyComponent,
-    ViewDocumentsComponent
+    ViewDocumentsComponent,
+    PageLgpdComponent
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@
             </div>
             <div class="card-footer bg-info text-center" *ngIf="req['state'] == 'APPROVED'">
                 <h1 class="text-light">Aprovado</h1>
+                <a class="access" (click)="put(req['date'], 'REFUSED', req['userCompany']['id'], req['id'])">Cancelar Aprovação</a>
             </div>
         </div>
     </div>

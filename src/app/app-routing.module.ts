@@ -7,6 +7,7 @@ import { ViewDocumentsComponent } from './components/company/view-documents/view
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavComponent } from './components/nav/nav.component';
+import { PageLgpdComponent } from './components/page-lgpd/page-lgpd.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HistoryComponent } from './components/user/history/history.component';
 import { PostCasamentoComponent } from './components/user/register-documents/documents/post-casamento/post-casamento.component';
@@ -24,6 +25,7 @@ import { RequestComponent } from './components/user/request/request.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'termos', component: PageLgpdComponent}, 
   {
     path: '', component: NavComponent, canActivate: [AuthGuard], children: [
       { path: 'home', component: HomeComponent },
