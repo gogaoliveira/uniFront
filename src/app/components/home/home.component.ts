@@ -15,10 +15,10 @@ import { DocService } from 'src/app/services/doc.service';
 export class HomeComponent implements OnInit {
 
   documents: String[] = []
-  sendDocuments: String[] = []
   name: String
   profile: String
   private: string
+  hasDoc: boolean
 
   constructor(
     private router: Router,
@@ -31,9 +31,10 @@ export class HomeComponent implements OnInit {
     this.service.getDateUser()
       .subscribe({
         next: (response) => {
-          this.documents = response['documents']
+          this.documents = this.sortJSON(response['documents'], 'type') 
           this.name = response['name']
           this.profile = response['profile']
+          this.hasDoc = (this.documents.length == 0)
         },
         error: () => {
           this.toast.error('Erro ao tentar cadastrar', 'Erro')
@@ -111,6 +112,15 @@ export class HomeComponent implements OnInit {
         }
       })
 
+  }
+
+  sortJSON(arr, key: string) {
+    return arr.sort(function(a, b){
+        var x = a[key];
+        var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    })
+    
   }
 
 

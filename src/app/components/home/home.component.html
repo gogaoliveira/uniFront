@@ -1,6 +1,9 @@
 <section *ngIf="profile == 'USUARIO'">
     <h1 class="m-4 pt-5">Olá, {{name}}</h1>
 
+    <div class="row m-5 p-5" *ngIf="hasDoc">
+        <h1 >Você não possui nenhum documento cadastrado</h1>
+    </div>
     <div class="card mb-1 ml-3 mr-2" *ngFor="let doc of documents">
         <a class="card-header cinzaGradiente" href="#{{doc['type']}}" data-bs-toggle="collapse">
             <div class="row">

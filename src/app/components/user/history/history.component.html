@@ -1,4 +1,6 @@
-
+<div class="row m-5 p-5" *ngIf="hasRequest">
+    <h1 >Você não possui nenhum historico de pedidos</h1>
+</div>
 <div class="row m-5 p-5">
     <div class="col-sm-12" *ngFor="let req of requestFilter">
         <div class="card bg-light mb-4">

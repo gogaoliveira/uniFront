@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Request } from 'src/app/models/request';
 import { ReqService } from 'src/app/services/req.service';
+import { Request } from 'src/app/models/request';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-request',
@@ -12,20 +11,18 @@ import { ReqService } from 'src/app/services/req.service';
 export class RequestComponent implements OnInit {
 
   requestAwait: String[] = []
+  msg: string
   request: Request = {
     date: '',
     state: '',
     user: 0,
     userCompany: 0
   }
-
-  msg: string
-  dater: Date
+  hasRequest: boolean
 
   constructor(
     private reqService: ReqService,
-    private toast: ToastrService,
-    private router: Router
+    private toast: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +32,26 @@ export class RequestComponent implements OnInit {
           this.filterAwait(response)
         },
         error: () => { }
+      })
+  }
+
+  put(date: string, state: string, userCompany: number, id: number) {
+    var index = this.requestAwait.findIndex(obj => obj['id'] == id)
+    this.requestAwait[index]['state'] = state
+    this.request.date = date;
+    this.request.state = state;
+    this.request.user = Number(localStorage.getItem('user'));
+    this.request.userCompany = userCompany;
+    this.msg = state == 'APPROVED' ? 'Pedido aprovado com sucesso' : 'Pedido reprovado com sucesso'
+    this.reqService.put(this.request, id)
+      .subscribe({
+        next: () => {
+          this.toast.info(this.msg)
+          window.location.reload();
+        },
+        error: () => {
+          this.toast.error('Erro')
+        }
       })
   }
 
@@ -53,27 +70,9 @@ export class RequestComponent implements OnInit {
         this.requestAwait.push(res[i]);
       }
     }
+    console.log(this.requestAwait)
+    this.hasRequest = (this.requestAwait.length == 0)
   }
 
-  put(date: string, state: string, userCompany: number, id: number) {
-    this.request.date = date;
-    this.request.state = state;
-    this.request.user = Number(localStorage.getItem('user'));
-    this.request.userCompany = userCompany;
-    if (state == 'APPROVED') {
-      this.msg = 'Pedido aprovado com sucesso'
-    } else {
-      this.msg = 'Pedido reprovado com sucesso'
-    }
-    this.reqService.put(this.request, id)
-      .subscribe({
-        next: () => {
-          this.toast.info(this.msg)
-          window.location.reload();
-        },
-        error: () => {
-          this.toast.error('Erro')
-        }
-      })
-  }
+  
 }

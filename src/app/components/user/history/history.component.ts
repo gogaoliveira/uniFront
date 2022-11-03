@@ -18,6 +18,8 @@ export class HistoryComponent implements OnInit {
     user: 0,
     userCompany: 0
   }
+  hasRequest: boolean
+
 
   constructor(
     private reqService: ReqService,
@@ -36,7 +38,6 @@ export class HistoryComponent implements OnInit {
 
   put(date: string, state: string, userCompany: number, id: number) {
     var index = this.requestFilter.findIndex(obj => obj['id'] == id)
-    this.requestFilter[index]['state'] = 'REFUSED'
     this.request.date = date;
     this.request.state = state;
     this.request.user = Number(localStorage.getItem('user'));
@@ -45,6 +46,7 @@ export class HistoryComponent implements OnInit {
       .subscribe({
         next: () => {
           this.toast.info('Pedido reprovado com sucesso')
+          this.requestFilter[index]['state'] = 'REFUSED'
         },
         error: () => {
           this.toast.error('Erro')
@@ -66,6 +68,7 @@ export class HistoryComponent implements OnInit {
         this.requestFilter.push(res[i]);
       }
     }
+    this.hasRequest = (this.requestFilter.length == 0)
   }
 
 }

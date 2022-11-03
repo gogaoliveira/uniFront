@@ -92,7 +92,8 @@ export class RegisterComponent implements OnInit {
         .subscribe({
           next: () => {
             this.creds.email = this.register.email,
-              this.creds.password = this.register.password
+            this.creds.password = this.register.password
+            
             this.logar()
           },
           error: (error) => {
