@@ -45,7 +45,7 @@
                         </tr>
                         <tr *ngIf="doc['photo1'] != null || doc['photo2'] != null  ">
                             <td *ngIf="doc['photo1'] != null">
-                                <img class="imgDocument" src="../../../assets/img/documents/{{doc['photo1']}}" alt="">
+                                <img class="img" src="../../../assets/img/documents/{{doc['photo1']}}" alt="">
                                 <a href="" target="_blank" download="{{doc['photo1']}}">
                                     <h3>Baixar
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -59,7 +59,7 @@
                                 </a>
                             </td>
                             <td *ngIf="doc['photo2'] != null">
-                                <img class="imgDocument" src="../../../assets/img/documents/{{doc['photo2']}}" alt="">
+                                <img class="img" src="../../../assets/img/documents/{{doc['photo2']}}" alt="">
                                 <a href="" target="_blank" download="{{doc['photo2']}}">
                                     <h3>Baixar
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

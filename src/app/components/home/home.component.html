@@ -16,7 +16,7 @@
         <div class="card-body collapse" id="{{doc['type']}}">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <div *ngIf="doc['privateDocument'] == 'N'">
+                    <div *ngIf="doc['privateDocument'] == 'N' ">
                         <button class="btn btn-success pl-4 pr-4 mb-2 mr-2" (click)="atualizaPrivacidade(doc['type'], doc['privateDocument'], doc['id'])">
                             Publico
                         </button>
@@ -24,7 +24,7 @@
                             <path d="M11 1a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5V3a3 3 0 0 1 6 0v4a.5.5 0 0 1-1 0V3a2 2 0 0 0-2-2z"/>
                         </svg>
                     </div>
-                    <div *ngIf="doc['privateDocument'] == 'S'" >
+                    <div *ngIf="doc['privateDocument'] == 'S' || doc['privateDocument'] == null " >
                         <button class="btn btn-danger pl-4 pr-4 mb-2 mr-2" (click)="atualizaPrivacidade(doc['type'], doc['privateDocument'], doc['id'])">
                             Privado
                         </button>

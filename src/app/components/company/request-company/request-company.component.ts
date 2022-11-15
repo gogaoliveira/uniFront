@@ -13,6 +13,9 @@ export class RequestCompanyComponent implements OnInit {
   requestRefused: String[] = []
   requestAwait: String[] = []
   request: String[] = []
+  hasReqAwait: boolean = false
+  hasReqRefused: boolean = false
+  hasReqApproved: boolean = false
 
   constructor(
     private reqService: ReqService,
@@ -23,7 +26,6 @@ export class RequestCompanyComponent implements OnInit {
     this.reqService.getRequestForCompany()
       .subscribe({
         next: (res) => {
-          console.log(res)
           for (let i = 0; i < res.length; i++) {
             if (res[i]['state'] == "APPROVED") {
               this.requestApproved.push(res[i]);
@@ -35,10 +37,11 @@ export class RequestCompanyComponent implements OnInit {
               this.requestAwait.push(res[i]);
             }
           }
+          this.request = res
         },
         error: () => { }
       })
-    this.request = this.requestAwait;
+    //this.request = this.requestAwait;
   }
 
   dataFormat(date: Date) {
@@ -53,10 +56,19 @@ export class RequestCompanyComponent implements OnInit {
     this.request = []
     if (tipe == "AWAIT") {
       this.request = this.requestAwait;
+      this.hasReqAwait = this.requestAwait.length == 0
+      this.hasReqApproved = false
+      this.hasReqRefused = false
     } else if (tipe == "APPROVED") {
       this.request = this.requestApproved;
+      this.hasReqApproved = this.requestApproved.length == 0
+      this.hasReqAwait = false
+      this.hasReqRefused = false
     } else if (tipe == "REFUSED") {
       this.request = this.requestRefused;
+      this.hasReqRefused = this.requestRefused.length == 0
+      this.hasReqApproved = false
+      this.hasReqAwait = false
     }
   }
 

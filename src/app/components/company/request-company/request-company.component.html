@@ -4,11 +4,22 @@
     <button class="btn btn-danger m-2" (click)="filter('REFUSED')"> REPROVADOS</button>
 </div>
 <div class="row p-5">
+    <div *ngIf="hasReqApproved">
+        <h1>Não existe pedidos aprovados</h1>
+    </div>
+    <div *ngIf="hasReqRefused">
+        <h1>Não existe pedidos reprovados</h1>
+    </div>
+    <div *ngIf="hasReqAwait">
+        <h1>Não existe pedidos aprovados</h1>
+    </div>
     <div class="col-sm-12" *ngFor="let req of request">
         <div class="card bg-light mb-4">
             <div class="card-header">
-                <div >
-                    <div ><h1><b>{{req['user']['name']}}</b></h1></div>
+                <div>
+                    <div>
+                        <h2><b>Dados do pedido</b></h2>
+                    </div>
                 </div>
             </div>
             <div class="card-body ">
